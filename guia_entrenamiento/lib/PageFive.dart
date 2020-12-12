@@ -15,9 +15,12 @@ class Training {
 
   static List<Training> getTrainings() {
     return <Training>[
-      Training(1, 'Macrociclo'),
-      Training(2, 'Mesociclo'),
-      Training(3, 'Microciclo'),
+      Training(1, 'Fuerza'),
+      Training(2, 'Inicial'),
+      Training(3, 'AMRAP'),
+      Training(4, 'EMOM'),
+      Training(5, 'Tabata'),
+      Training(6, 'Sin tiempo'),
     ];
   }
 }
@@ -66,7 +69,7 @@ class DropDownFiveState extends State<DropDownFive> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: new Scaffold(
+      home: Scaffold(
         appBar: new AppBar(
           backgroundColor: Colors.white,
           title: new Text(
@@ -90,10 +93,7 @@ class DropDownFiveState extends State<DropDownFive> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(
-                  height: 50.0,
-                ),
-                Text("Escoja el timepo del ciclo"),
+                Text("Select a training"),
                 SizedBox(
                   height: 20.0,
                 ),

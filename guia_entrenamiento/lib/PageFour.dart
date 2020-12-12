@@ -15,12 +15,9 @@ class Training {
 
   static List<Training> getTrainings() {
     return <Training>[
-      Training(1, 'Fuerza'),
-      Training(2, 'Inicial'),
-      Training(3, 'AMRAP'),
-      Training(4, 'EMOM'),
-      Training(5, 'Tabata'),
-      Training(6, 'Sin tiempo'),
+      Training(1, 'Macrociclo'),
+      Training(2, 'Mesociclo'),
+      Training(3, 'Microciclo'),
     ];
   }
 }
@@ -30,6 +27,8 @@ class DropDownFourState extends State<DropDownFour> {
   List<Training> _trainings = Training.getTrainings();
   List<DropdownMenuItem<Training>> _dropdownMenuItems;
   Training _selectedTraining;
+
+  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -57,55 +56,80 @@ class DropDownFourState extends State<DropDownFour> {
     });
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-        ),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(
-                'assets/images/logo.png',
-                height: 150,
-              ),
-              Text(
-                "Guía digital de entrenamiento físico",
-                style: TextStyle(
-                    height: 1,
-                    fontSize: 30,
-                    decoration: TextDecoration.none,
-                    fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                height: 50.0,
-              ),
-              Text("Select a training"),
-              SizedBox(
-                height: 20.0,
-              ),
-              DropdownButton(
-                value: _selectedTraining,
-                items: _dropdownMenuItems,
-                onChanged: onChangeDropdownItem,
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Text('Selected: ${_selectedTraining.name}'),
-              const SizedBox(height: 30),
-              RaisedButton(
-                onPressed: () {},
-                child: const Text('Siguiente', style: TextStyle(fontSize: 20)),
-              ),
-            ],
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: new Scaffold(
+        appBar: new AppBar(
+          backgroundColor: Colors.white,
+          title: new Text(
+            "Guía digital de entrenamiento físico",
+            style: TextStyle(
+              color: Colors.black,
+            ),
           ),
+          leading: Image.asset(
+            'assets/images/logo.png',
+            height: 25,
+          ),
+        ),
+        body: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  height: 50.0,
+                ),
+                Text("Escoja el tiempo del ciclo"),
+                SizedBox(
+                  height: 20.0,
+                ),
+                DropdownButton(
+                  value: _selectedTraining,
+                  items: _dropdownMenuItems,
+                  onChanged: onChangeDropdownItem,
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Text('Selected: ${_selectedTraining.name}'),
+                const SizedBox(height: 30),
+                RaisedButton(
+                  onPressed: () {},
+                  child:
+                      const Text('Siguiente', style: TextStyle(fontSize: 20)),
+                ),
+              ],
+            ),
+          ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.navigate_before),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.navigate_next),
+              label: '',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.amber[800],
+          onTap: _onItemTapped,
         ),
       ),
     );
