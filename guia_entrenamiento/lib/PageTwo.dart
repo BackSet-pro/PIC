@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:guia_entrenamiento/PageTrhee.dart';
 
-class DropDownTwo extends StatefulWidget {
-  DropDownTwo() : super();
+class PageTwo extends StatefulWidget {
+  PageTwo() : super();
   final String title = "DropDown Demo";
   @override
-  DropDownState createState() => DropDownState();
+  PageTwoState createState() => PageTwoState();
 }
 
 class Unit {
@@ -24,7 +25,7 @@ class Unit {
   }
 }
 
-class DropDownState extends State<DropDownTwo> {
+class PageTwoState extends State<PageTwo> {
   //
   List<Unit> _units = Unit.getUnits();
   List<DropdownMenuItem<Unit>> _dropdownMenuItems;
@@ -59,65 +60,94 @@ class DropDownState extends State<DropDownTwo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-        ),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(
-                'assets/images/logo.png',
-                height: 150,
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Text(
-                "Guía digital de entrenamiento físico",
-                style: TextStyle(
-                    height: 1,
-                    fontSize: 30,
-                    decoration: TextDecoration.none,
-                    fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                height: 50.0,
-              ),
-              Text(
-                "Complete su perfil",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.red[300],
-                  fontSize: 20,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+          child: Center(
+            child: ListView(
+              //crossAxisAlignment: CrossAxisAlignment.center,
+              //mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  height: 20.0,
                 ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              DropdownButton(
-                value: _selectedUnit,
-                items: _dropdownMenuItems,
-                onChanged: onChangeDropdownItem,
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Text('Selected: ${_selectedUnit.name}'),
-              const SizedBox(height: 30),
-              RaisedButton(
-                onPressed: () {},
-                child: const Text('Siguiente', style: TextStyle(fontSize: 20)),
-              ),
-            ],
+                Image.asset(
+                  'assets/images/logo.png',
+                  height: 150,
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Text(
+                  "Guía digital de entrenamiento físico",
+                  style: TextStyle(
+                      height: 1,
+                      fontSize: 30,
+                      decoration: TextDecoration.none,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 50.0,
+                ),
+                Text(
+                  "Complete su perfil",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.red[300],
+                    fontSize: 20,
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Center(
+                  child: DropdownButton(
+                    value: _selectedUnit,
+                    items: _dropdownMenuItems,
+                    onChanged: onChangeDropdownItem,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.45,
+                      right: MediaQuery.of(context).size.width * 0.45),
+                  child: FlatButton(
+                    color: Colors.transparent,
+                    //splashColor: Colors.black26,
+                    onPressed: () {
+                      _nextPage(context);
+                    },
+                    child: Text(
+                      '" "',
+                      style: TextStyle(color: Colors.transparent, fontSize: 5),
+                    ),
+                  ),
+                ),
+
+                // Text('Selected: ${_selectedUnit.name}'),
+                //const SizedBox(height: 30),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  _nextPage(BuildContext context) {
+    final route = MaterialPageRoute(builder: (BuildContext context) {
+      return PageTrhee();
+    });
+    Navigator.of(context).push(route);
+  }
+
+  _backPage(BuildContext context) {
+    Navigator.of(context).pop();
   }
 }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:guia_entrenamiento/PageSix.dart';
 
-class DropDownFive extends StatefulWidget {
-  DropDownFive() : super();
+class PageFive extends StatefulWidget {
+  PageFive() : super();
   final String title = "DropDown Demo";
   @override
-  DropDownFiveState createState() => DropDownFiveState();
+  PageFiveState createState() => PageFiveState();
 }
 
 class Training {
@@ -25,7 +26,7 @@ class Training {
   }
 }
 
-class DropDownFiveState extends State<DropDownFive> {
+class PageFiveState extends State<PageFive> {
   //
   List<Training> _trainings = Training.getTrainings();
   List<DropdownMenuItem<Training>> _dropdownMenuItems;
@@ -93,7 +94,13 @@ class DropDownFiveState extends State<DropDownFive> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text("Select a training"),
+                Text(
+                  "Escoja el tipo de Entrenamiento",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
                 SizedBox(
                   height: 20.0,
                 ),
@@ -102,15 +109,21 @@ class DropDownFiveState extends State<DropDownFive> {
                   items: _dropdownMenuItems,
                   onChanged: onChangeDropdownItem,
                 ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Text('Selected: ${_selectedTraining.name}'),
-                const SizedBox(height: 30),
-                RaisedButton(
-                  onPressed: () {},
-                  child:
-                      const Text('Siguiente', style: TextStyle(fontSize: 20)),
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.45,
+                      right: MediaQuery.of(context).size.width * 0.45),
+                  child: FlatButton(
+                    color: Colors.transparent,
+                    //splashColor: Colors.black26,
+                    onPressed: () {
+                      _nextPage(context);
+                    },
+                    child: Text(
+                      '" "',
+                      style: TextStyle(color: Colors.transparent, fontSize: 5),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -133,5 +146,12 @@ class DropDownFiveState extends State<DropDownFive> {
         ),
       ),
     );
+  }
+
+  _nextPage(BuildContext context) {
+    final route = MaterialPageRoute(builder: (BuildContext context) {
+      return PageSix();
+    });
+    Navigator.of(context).push(route);
   }
 }

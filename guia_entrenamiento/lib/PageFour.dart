@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'PageFive.dart';
 
-class DropDownFour extends StatefulWidget {
-  DropDownFour() : super();
+class PageFour extends StatefulWidget {
+  PageFour() : super();
   final String title = "DropDown Demo";
   @override
-  DropDownFourState createState() => DropDownFourState();
+  PageFourState createState() => PageFourState();
 }
 
 class Training {
@@ -22,7 +23,7 @@ class Training {
   }
 }
 
-class DropDownFourState extends State<DropDownFour> {
+class PageFourState extends State<PageFour> {
   //
   List<Training> _trainings = Training.getTrainings();
   List<DropdownMenuItem<Training>> _dropdownMenuItems;
@@ -93,7 +94,13 @@ class DropDownFourState extends State<DropDownFour> {
                 SizedBox(
                   height: 50.0,
                 ),
-                Text("Escoja el tiempo del ciclo"),
+                Text(
+                  "Escoja el tiempo del ciclo",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
                 SizedBox(
                   height: 20.0,
                 ),
@@ -102,15 +109,21 @@ class DropDownFourState extends State<DropDownFour> {
                   items: _dropdownMenuItems,
                   onChanged: onChangeDropdownItem,
                 ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Text('Selected: ${_selectedTraining.name}'),
-                const SizedBox(height: 30),
-                RaisedButton(
-                  onPressed: () {},
-                  child:
-                      const Text('Siguiente', style: TextStyle(fontSize: 20)),
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.45,
+                      right: MediaQuery.of(context).size.width * 0.45),
+                  child: FlatButton(
+                    color: Colors.transparent,
+                    //splashColor: Colors.black26,
+                    onPressed: () {
+                      _nextPage(context);
+                    },
+                    child: Text(
+                      '" "',
+                      style: TextStyle(color: Colors.transparent, fontSize: 5),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -133,5 +146,12 @@ class DropDownFourState extends State<DropDownFour> {
         ),
       ),
     );
+  }
+
+  _nextPage(BuildContext context) {
+    final route = MaterialPageRoute(builder: (BuildContext context) {
+      return PageFive();
+    });
+    Navigator.of(context).push(route);
   }
 }

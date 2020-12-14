@@ -1,92 +1,58 @@
 import 'package:flutter/material.dart';
+import 'Models.dart';
 
-class DropDownSix extends StatefulWidget {
-  DropDownSix() : super();
+class PageSix extends StatefulWidget {
+  PageSix() : super();
   final String title = "DropDown Demo";
   @override
-  DropDownSixState createState() => DropDownSixState();
+  PageSixState createState() => PageSixState();
 }
 
-class Training {
-  int id;
-  String name;
-
-  Training(this.id, this.name);
-
-  static List<Training> getTrainings() {
-    return <Training>[
-      Training(1, 'Por tiempo'),
-      Training(2, 'Calentamiento'),
-      Training(3, 'Inicial'),
-      Training(4, 'Principal'),
-      Training(5, 'Estiramiento'),
-    ];
-  }
-}
-
-class Time {
-  int id;
-  String name;
-
-  Time(this.id, this.name);
-
-  static List<Time> getTimes() {
-    return <Time>[
-      Time(1, '5 min'),
-      Time(2, '10 min'),
-      Time(3, '15 min'),
-      Time(4, '20 min'),
-      Time(5, '25 min'),
-    ];
-  }
-}
-
-class Rep {
-  int id;
-  String name;
-
-  Rep(this.id, this.name);
-
-  static List<Rep> getRep() {
-    return <Rep>[
-      Rep(1, '5'),
-      Rep(2, '10'),
-      Rep(3, '15'),
-      Rep(4, '20'),
-      Rep(5, '25'),
-    ];
-  }
-}
-
-class DropDownSixState extends State<DropDownSix> {
+class PageSixState extends State<PageSix> {
   //
   List<Training> _trainings = Training.getTrainings();
   List<DropdownMenuItem<Training>> _dropdownMenuItems;
-  Training _selectedTraining;
+  List<Training> _selectedTraining = new List(7);
 
   List<Time> _times = Time.getTimes();
   List<DropdownMenuItem<Time>> _dropdownMenuItemsTime;
-  Time _selectedTime;
+  List<Time> _selectedTime = new List(7);
 
-  List<Rep> _reps = Rep.getRep();
+  List<Rep> _reps = Rep.getReps();
   List<DropdownMenuItem<Rep>> _dropdownMenuItemsRep;
-  Rep _selectedRep;
+  List<Rep> _selectedRep = new List(5);
 
   List<bool> checkBoxValues = [false, false, false];
-  List<bool> checkBoxValuesCalentameinto = [false, false, false];
+  List<bool> checkBoxValuesCalentamiento = [false, false, false];
 
   int _selectedIndex = 0;
 
   @override
   void initState() {
     _dropdownMenuItemsTime = buildDropdownMenuItemsTime(_times);
-    _selectedTime = _dropdownMenuItemsTime[0].value;
+    _selectedTime[0] = _dropdownMenuItemsTime[0].value;
+    _selectedTime[1] = _dropdownMenuItemsTime[0].value;
+    _selectedTime[2] = _dropdownMenuItemsTime[0].value;
+    _selectedTime[3] = _dropdownMenuItemsTime[0].value;
+    _selectedTime[4] = _dropdownMenuItemsTime[0].value;
+    _selectedTime[5] = _dropdownMenuItemsTime[0].value;
+    _selectedTime[6] = _dropdownMenuItemsTime[0].value;
 
     _dropdownMenuItems = buildDropdownMenuItems(_trainings);
-    _selectedTraining = _dropdownMenuItems[0].value;
+    _selectedTraining[0] = _dropdownMenuItems[0].value;
+    _selectedTraining[1] = _dropdownMenuItems[0].value;
+    _selectedTraining[2] = _dropdownMenuItems[0].value;
+    _selectedTraining[3] = _dropdownMenuItems[0].value;
+    _selectedTraining[4] = _dropdownMenuItems[0].value;
+    _selectedTraining[5] = _dropdownMenuItems[0].value;
+    _selectedTraining[6] = _dropdownMenuItems[0].value;
 
     _dropdownMenuItemsRep = buildDropdownMenuItemsRep(_reps);
-    _selectedRep = _dropdownMenuItemsRep[0].value;
+    _selectedRep[0] = _dropdownMenuItemsRep[0].value;
+    _selectedRep[1] = _dropdownMenuItemsRep[0].value;
+    _selectedRep[2] = _dropdownMenuItemsRep[0].value;
+    _selectedRep[3] = _dropdownMenuItemsRep[0].value;
+    _selectedRep[4] = _dropdownMenuItemsRep[0].value;
 
     super.initState();
   }
@@ -132,19 +98,7 @@ class DropDownSixState extends State<DropDownSix> {
 
   onChangeDropdownItem(Training selectedTraining) {
     setState(() {
-      _selectedTraining = selectedTraining;
-    });
-  }
-
-  onChangeDropdownItemTime(Time selectedTime) {
-    setState(() {
-      _selectedTime = selectedTime;
-    });
-  }
-
-  onChangeDropdownItemRep(Rep selectedRep) {
-    setState(() {
-      _selectedRep = selectedRep;
+      _selectedTraining[0] = selectedTraining;
     });
   }
 
@@ -190,7 +144,7 @@ class DropDownSixState extends State<DropDownSix> {
                 const SizedBox(
                   height: 20.0,
                 ),*/
-                buildContainer(selectedTraining: _selectedTraining.name),
+                buildContainer(selectedTraining: _selectedTraining[0].name),
               ],
             ),
           ),
@@ -223,62 +177,114 @@ class DropDownSixState extends State<DropDownSix> {
         container = Container(
           child: Column(
             children: [
-              porTiempo(
-                imageName: 'logo_c1.png',
-                imageH: 50,
-                titleImage: 'Superior',
-                fontSize: 25,
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/logo_c1.png',
+                        height: 50,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'tiempo',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: DropdownButton(
+                        value: _selectedTime[0],
+                        items: _dropdownMenuItemsTime,
+                        onChanged: (Time selectedTime) {
+                          setState(() {
+                            _selectedTime[0] = selectedTime;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 20.0,
               ),
-              porTiempo(
-                imageName: 'logo_c2.png',
-                imageH: 50,
-                titleImage: 'Medio',
-                fontSize: 25,
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/logo_c2.png',
+                        height: 50,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'tiempo',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: DropdownButton(
+                        value: _selectedTime[1],
+                        items: _dropdownMenuItemsTime,
+                        onChanged: (Time selectedTime) {
+                          setState(() {
+                            _selectedTime[1] = selectedTime;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 20.0,
               ),
-              porTiempo(
-                imageName: 'logo_c3.png',
-                imageH: 50,
-                titleImage: 'Inferior',
-                fontSize: 25,
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/logo_c3.png',
+                        height: 50,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'tiempo',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: DropdownButton(
+                        value: _selectedTime[2],
+                        items: _dropdownMenuItemsTime,
+                        onChanged: (Time selectedTime) {
+                          setState(() {
+                            _selectedTime[2] = selectedTime;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        );
-        break;
-      case 'inicial':
-        container = Container(
-          child: Column(
-            children: [
-              inicial(
-                  imageName: 'logo_i1.jpg',
-                  imageH: 50,
-                  titleImage: 'Single Under',
-                  fontSize: 25,
-                  posCheckBox: 0),
-              const SizedBox(
-                height: 20.0,
-              ),
-              inicial(
-                  imageName: 'logo_i2.jpg',
-                  imageH: 50,
-                  titleImage: 'Burpees',
-                  fontSize: 25,
-                  posCheckBox: 1),
-              const SizedBox(
-                height: 20.0,
-              ),
-              inicial(
-                  imageName: 'logo_i3.jpg',
-                  imageH: 50,
-                  titleImage: 'Inferior',
-                  fontSize: 25,
-                  posCheckBox: 2),
             ],
           ),
         );
@@ -315,51 +321,225 @@ class DropDownSixState extends State<DropDownSix> {
           ),
         );
         break;
+      case 'inicial':
+        container = Container(
+          child: Column(
+            children: [
+              inicial(
+                  imageName: 'logo_i1.jpg',
+                  imageH: 50,
+                  titleImage: 'Single Under',
+                  fontSize: 25,
+                  posCheckBox: 0),
+              const SizedBox(
+                height: 20.0,
+              ),
+              inicial(
+                imageName: 'logo_i2.jpg',
+                imageH: 50,
+                titleImage: 'Burpees',
+                fontSize: 25,
+                posCheckBox: 1,
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              inicial(
+                  imageName: 'logo_i3.jpg',
+                  imageH: 50,
+                  titleImage: 'Inferior',
+                  fontSize: 25,
+                  posCheckBox: 2),
+            ],
+          ),
+        );
+        break;
+
       case 'principal':
         container = Container(
           child: Column(
             children: [
-              principal(
-                imageName: 'logo_r1.jpg',
-                imageH: 50,
-                titleImage: 'Rep.',
-                fontSize: 25,
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/logo_r1.jpg',
+                        height: 50,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Rep.',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: DropdownButton(
+                        value: _selectedRep[0],
+                        items: _dropdownMenuItemsRep,
+                        onChanged: (Rep selectedRep) {
+                          setState(() {
+                            _selectedRep[0] = selectedRep;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 20.0,
               ),
-              principal(
-                imageName: 'logo_r2.jpg',
-                imageH: 50,
-                titleImage: 'Rep.',
-                fontSize: 25,
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/logo_r2.jpg',
+                        height: 50,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Rep.',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: DropdownButton(
+                        value: _selectedRep[1],
+                        items: _dropdownMenuItemsRep,
+                        onChanged: (Rep selectedRep) {
+                          setState(() {
+                            _selectedRep[1] = selectedRep;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 20.0,
               ),
-              principal(
-                imageName: 'logo_r3.jpg',
-                imageH: 50,
-                titleImage: 'Rep.',
-                fontSize: 25,
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/logo_r3.jpg',
+                        height: 50,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Rep.',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: DropdownButton(
+                        value: _selectedRep[2],
+                        items: _dropdownMenuItemsRep,
+                        onChanged: (Rep selectedRep) {
+                          setState(() {
+                            _selectedRep[2] = selectedRep;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 20.0,
               ),
-              principal(
-                imageName: 'logo_r4.jpg',
-                imageH: 50,
-                titleImage: 'Rep.',
-                fontSize: 25,
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/logo_r4.jpg',
+                        height: 50,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Rep.',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: DropdownButton(
+                        value: _selectedRep[3],
+                        items: _dropdownMenuItemsRep,
+                        onChanged: (Rep selectedRep) {
+                          setState(() {
+                            _selectedRep[3] = selectedRep;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 20.0,
               ),
-              principal(
-                imageName: 'logo_r4.jpg',
-                imageH: 50,
-                titleImage: 'Rep.',
-                fontSize: 25,
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/logo_r4.jpg',
+                        height: 50,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Rep.',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: DropdownButton(
+                        value: _selectedRep[4],
+                        items: _dropdownMenuItemsRep,
+                        onChanged: (Rep selectedRep) {
+                          setState(() {
+                            _selectedRep[4] = selectedRep;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -369,29 +549,152 @@ class DropDownSixState extends State<DropDownSix> {
         container = Container(
           child: Column(
             children: [
-              porTiempo(
-                imageName: 'logo_c1.png',
-                imageH: 50,
-                titleImage: 'tiempo',
-                fontSize: 25,
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/logo_c1.png',
+                        height: 50,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'tiempo',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: DropdownButton(
+                        value: _selectedTime[3],
+                        items: _dropdownMenuItemsTime,
+                        onChanged: (Time selectedTime) {
+                          setState(() {
+                            _selectedTime[3] = selectedTime;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 20.0,
               ),
-              porTiempo(
-                imageName: 'logo_c2.png',
-                imageH: 50,
-                titleImage: 'tiempo.',
-                fontSize: 25,
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/logo_c2.png',
+                        height: 50,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'tiempo',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: DropdownButton(
+                        value: _selectedTime[4],
+                        items: _dropdownMenuItemsTime,
+                        onChanged: (Time selectedTime) {
+                          setState(() {
+                            _selectedTime[4] = selectedTime;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 20.0,
               ),
-              porTiempo(
-                imageName: 'logo_c3.png',
-                imageH: 50,
-                titleImage: 'tiempo',
-                fontSize: 25,
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/logo_c3.png',
+                        height: 50,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'tiempo',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: DropdownButton(
+                        value: _selectedTime[5],
+                        items: _dropdownMenuItemsTime,
+                        onChanged: (Time selectedTime) {
+                          setState(() {
+                            _selectedTime[5] = selectedTime;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/logo_c1.png',
+                        height: 50,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'tiempo',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: DropdownButton(
+                        value: _selectedTime[6],
+                        items: _dropdownMenuItemsTime,
+                        onChanged: (Time selectedTime) {
+                          setState(
+                            () {
+                              _selectedTime[6] = selectedTime;
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 70.0,
@@ -411,59 +714,9 @@ class DropDownSixState extends State<DropDownSix> {
 
   DropdownButton<Training> buildDropdownButtonTraining() {
     return DropdownButton(
-      value: _selectedTraining,
+      value: _selectedTraining[0],
       items: _dropdownMenuItems,
       onChanged: onChangeDropdownItem,
-    );
-  }
-
-  DropdownButton<Time> buildDropdownButtonTime() {
-    return DropdownButton(
-      value: _selectedTime,
-      items: _dropdownMenuItemsTime,
-      onChanged: onChangeDropdownItemTime,
-    );
-  }
-
-  DropdownButton<Rep> buildDropdownButtonRep() {
-    return DropdownButton(
-      value: _selectedRep,
-      items: _dropdownMenuItemsRep,
-      onChanged: onChangeDropdownItemRep,
-    );
-  }
-
-  StatelessWidget porTiempo({
-    String imageName,
-    double imageH,
-    String titleImage,
-    double fontSize,
-  }) {
-    return Container(
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Image.asset(
-              'assets/images/' + imageName,
-              height: imageH,
-            ),
-          ),
-          Expanded(
-            child: Text(
-              titleImage,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: fontSize,
-              ),
-            ),
-          ),
-          Expanded(
-            child: buildDropdownButtonTime(),
-          ),
-        ],
-      ),
     );
   }
 
@@ -552,46 +805,12 @@ class DropDownSixState extends State<DropDownSix> {
 
   Checkbox buildCheckboxCalentamiento({int posCheckBox}) {
     return Checkbox(
-      value: checkBoxValuesCalentameinto[posCheckBox],
+      value: checkBoxValuesCalentamiento[posCheckBox],
       onChanged: (bool value) {
         setState(
-          () => checkBoxValuesCalentameinto[posCheckBox] = value,
+          () => checkBoxValuesCalentamiento[posCheckBox] = value,
         );
       },
-    );
-  }
-
-  StatelessWidget principal({
-    String imageName,
-    double imageH,
-    String titleImage,
-    double fontSize,
-  }) {
-    return Container(
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Image.asset(
-              'assets/images/' + imageName,
-              height: imageH,
-            ),
-          ),
-          Expanded(
-            child: Text(
-              titleImage,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: fontSize,
-              ),
-            ),
-          ),
-          Expanded(
-            child: buildDropdownButtonRep(),
-          ),
-        ],
-      ),
     );
   }
 }
