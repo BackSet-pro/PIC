@@ -1,36 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:guia_entrenamiento/PageTrhee.dart';
-import 'PageOne.dart';
-import 'PageTwo.dart';
-import 'PageTrhee.dart';
-import 'PageFour.dart';
-import 'PageFive.dart';
-import 'PageSix.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() {
-  runApp(MyApp());
-}
+import 'package:guia_entrenamiento/src/routes/routes.dart';
 
-class MyApp extends StatefulWidget {
-  // This widget is the root of your application.
-  @override
-  _MyAppState createState() => _MyAppState();
-}
+void main() => runApp(MyApp());
 
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      //home: PageOne(),
-      //home: PageTrhee(),
-      //home: PageOne(),
-      home: PageOne(),
-      //home: PageSix(),
+      localizationsDelegates: [
+        // ... app-specific localization delegate[s] here
+        //AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', 'US'), // English, no country code
+        const Locale('es', 'ES'), // Arabic, no country code
+      ],
+      title: 'Guia de entrenamiento Demo',
+      // theme: ThemeData(
+      //   primarySwatch: Colors.blue,
+      //   visualDensity: VisualDensity.adaptivePlatformDensity,
+      // ),
+      initialRoute: '/',
+      routes: getAplicationRoutes(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -23,11 +23,11 @@ class Time {
 
   static List<Time> getTimes() {
     return <Time>[
-      Time(0, '5 min'),
-      Time(1, '10 min'),
-      Time(2, '15 min'),
-      Time(3, '20 min'),
-      Time(4, '25 min'),
+      Time(0, '1 min'),
+      Time(1, '2 min'),
+      Time(2, '3 min'),
+      Time(3, '4 min'),
+      Time(4, '5 min'),
     ];
   }
 }
@@ -40,11 +40,11 @@ class Rep {
 
   static List<Rep> getReps() {
     return <Rep>[
-      Rep(0, '5'),
-      Rep(1, '10'),
-      Rep(2, '15'),
-      Rep(3, '20'),
-      Rep(4, '25'),
+      Rep(0, '1'),
+      Rep(1, '2'),
+      Rep(2, '3'),
+      Rep(3, '4'),
+      Rep(4, '5'),
     ];
   }
 }
